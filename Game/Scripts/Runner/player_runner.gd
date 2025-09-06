@@ -19,6 +19,12 @@ var special_cooldown := 5
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@export var camera : Camera2D
+const DEAD_ZOOM_MAX := 4.0
+const DEAD_INC := .1
+var stop_player := false
+
 
 var shadow_scene := preload("res://Cenas/Runner/runner_shadow.tscn")
 
@@ -52,12 +58,12 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	if !stop_player:
+		velh = Input.get_axis("LEFT", "RIGHT")
+		velv = Input.get_axis("UP", "DOWN")
 
-	velh = Input.get_axis("LEFT", "RIGHT")
-	velv = Input.get_axis("UP", "DOWN")
-
-	velocity.x = velh * speed
-	velocity.y = velv * speed
+		velocity.x = velh * speed
+		velocity.y = velv * speed
 	
 	move_and_slide()
 	position.x = clamp(position.x, -background_width * .5 + collsion_width * .5, background_width * .5 - collsion_width * .5)
@@ -96,10 +102,24 @@ func state_machine():
 			if velh == 0 && velv == 0:
 				sprite.stop()
 				state = "idle"
+		"dead":
+			zoom_camera()
+			velh = 0
+			velv = 0;
+			velocity = Vector2(0, 0)
+			stop_player = true
+			Global.player_dead = true
+			
+			anim_morte()
+			
+			if animation_player.current_animation != "dead":
+				animation_player.play("dead")
 
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Special") && has_special):
 		special_activate()
+	if (event.is_action_pressed("dead")):
+		state = "dead"
 
 
 func dano():
@@ -125,3 +145,19 @@ func _on_special_time_timeout() -> void:
 func _on_special_cooldown_timeout() -> void:
 	has_special = true
 	in_cooldown = false
+
+
+func zoom_camera():
+	camera.zoom = Vector2(lerp(camera.zoom.x, DEAD_ZOOM_MAX, DEAD_INC), lerp(camera.zoom.y, DEAD_ZOOM_MAX, DEAD_INC))
+	camera.position = Vector2(lerp(camera.position.x, position.x, DEAD_INC), lerp(camera.position.y, position.y, DEAD_INC))
+
+
+func reset():
+	state = "reset"
+
+func anim_morte():
+	if sprite.animation != "dead":
+		sprite.play("dead")
+	else:
+		if sprite.frame >= 6:
+			sprite.frame = 6

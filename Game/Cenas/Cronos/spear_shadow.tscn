@@ -22,6 +22,14 @@ animations = [{
 "loop": true,
 "name": &"final",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"null",
+"speed": 5.0
 }]
 
 [node name="SpearShadow" type="Node2D"]
@@ -30,7 +38,7 @@ script = ExtResource("1_3hbfa")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_wfrj7")
 sprite_frames = SubResource("SpriteFrames_ah7kf")
-animation = &"final"
+animation = &"null"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
