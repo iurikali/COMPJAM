@@ -77,6 +77,7 @@ func _physics_process(delta: float) -> void:
 func state_machine():
 	match state:
 		"idle":
+			Global.player_dead = false
 			sprite.play("idle")
 			if velh != 0 or velv != 0:
 				sprite.stop()

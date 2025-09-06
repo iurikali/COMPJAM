@@ -10,6 +10,9 @@ var player_dead := false
 func _on_ready() -> void:
 	pass # Replace with function body.
 
+func _process(delta: float) -> void:
+	print(player_dead)
+
 func call_transition(scene : String):
 	Transicao.fade_in(scene)
 
