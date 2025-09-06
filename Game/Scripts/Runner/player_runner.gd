@@ -4,6 +4,8 @@ var velh := 0
 var velv := 0
 var speed := 100
 
+var speed_array := [100, 200, 300, 400]
+
 
 var speed_special := 100
 var has_special := true
@@ -64,8 +66,8 @@ func _physics_process(delta: float) -> void:
 		velh = Input.get_axis("LEFT", "RIGHT")
 		velv = Input.get_axis("UP", "DOWN")
 
-		velocity.x = velh * speed
-		velocity.y = velv * speed
+		velocity.x = velh * speed_array[Global.estagio - 1]
+		velocity.y = velv * speed_array[Global.estagio - 1]
 	
 	move_and_slide()
 	position.x = clamp(position.x, -background_width * .5 + collsion_width * .5, background_width * .5 - collsion_width * .5)
@@ -130,13 +132,13 @@ func dano():
 	
 
 func special_activate():
-	speed += speed_special
+	speed_array[Global.estagio - 1] += speed_special
 	has_special = false
 	filter.get_node("AnimationPlayer").play("on")
 	special_time_node.start()
 
 func special_desactivte():
-	speed -= speed_special
+	speed_array[Global.estagio - 1] -= speed_special
 	in_cooldown = true
 	filter.get_node("AnimationPlayer").play("off")
 	special_cooldown_node.start()
