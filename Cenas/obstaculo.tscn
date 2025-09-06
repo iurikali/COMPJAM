@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cagie5mys36dc"]
 
 [ext_resource type="Script" path="res://Scripts/obstaculo.gd" id="1_xv8jd"]
-[ext_resource type="Texture2D" uid="uid://0g82xxj18tdq" path="res://Assets/tiles/spear.png" id="2_kvrke"]
+[ext_resource type="Texture2D" uid="uid://0g82xxj18tdq" path="res://Assets/tiles/spear.png" id="2_eo0kh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qma4n"]
 
@@ -9,10 +9,10 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_kvrke")
+"texture": ExtResource("2_eo0kh")
 }],
 "loop": true,
-"name": &"padrones",
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -26,6 +26,6 @@ shape = SubResource("CircleShape2D_qma4n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_252ob")
-animation = &"padrones"
+animation = &"new_animation"
 
 [connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]
