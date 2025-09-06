@@ -452,6 +452,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_cymd5"]
 resource_name = "dead"
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -471,7 +472,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.933333),
+"times": PackedFloat32Array(2.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],

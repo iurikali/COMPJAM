@@ -158,11 +158,11 @@ func zoom_camera():
 
 
 func reset():
-	state = "reset"
+	Global.call_reset()
 
 func anim_morte():
 	if sprite.animation != "dead":
 		sprite.play("dead")
 	else:
-		if sprite.frame >= 6:
-			sprite.frame = 6
+		if sprite.frame >= 14:
+			sprite.frame = 14

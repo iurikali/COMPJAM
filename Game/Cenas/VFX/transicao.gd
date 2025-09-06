@@ -1,8 +1,10 @@
 extends CanvasLayer
 
+
 @export var next_scene : String
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var on_tran := false
+var reset := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,5 +26,6 @@ func fade_in(next : String):
 	animation_player.play("transition")
 
 func change_scene():
-		get_tree().change_scene_to_file(next_scene)
-		on_tran = false
+
+	get_tree().reload_current_scene()
+	on_tran = false
