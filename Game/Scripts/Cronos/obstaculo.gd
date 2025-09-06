@@ -4,13 +4,16 @@ var SPEED = 200
 var saiu = false
 var tol_block= 100
 var tol_mouse = 10
+var off = 30
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $Area2D/AnimatedSprite2D
 
 var shadow_scene := preload("res://Cenas/Cronos/spear_shadow.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	position =  Vector2(-Global.window_size.x / 2, -Global.window_size.y / 2)
 	pass # Replace with function body.
 		
 
@@ -32,14 +35,19 @@ func _process(delta: float) -> void:
 		var y
 
 		
+		#var dists = [
+			#dist(mouse_pos, Vector2(mouse_pos.x,minY)), 
+			#dist(mouse_pos, Vector2(maxX, mouse_pos.y)),
+			#dist(mouse_pos, Vector2(mouse_pos.x, maxY)),
+			#dist(mouse_pos, Vector2(minY, mouse_pos.y))
+		#]
+		
 		var dists = [
-			dist(mouse_pos, Vector2(mouse_pos.x,minY)), 
-			dist(mouse_pos, Vector2(maxX, mouse_pos.y)),
-			dist(mouse_pos, Vector2(mouse_pos.x, maxY)),
-			dist(mouse_pos, Vector2(minY, mouse_pos.y))
+			abs(minY - mouse_pos.y), 
+			abs(maxX - mouse_pos.x),
+			abs(maxY - mouse_pos.y),
+			abs(minX - mouse_pos.x)
 		]
-
-				
 
 		var valido = verifica_boundary(position, tol_block)
 		var mouse_valido = verifica_boundary(mouse_pos, tol_mouse)
@@ -74,24 +82,24 @@ func _process(delta: float) -> void:
 				x = mouse_pos.x
 				
 			if mouse_pos.y < minY:
-				y = minY
+				y = minY 
 			elif mouse_pos.y > maxY:
-				y = maxY
+				y = maxY 
 			else:
 				y = mouse_pos.y
 				
 			if indice == 0:
 				animated_sprite_2d.rotation_degrees = 180
-				position = Vector2(x, minY)
+				position = Vector2(x, minY - off)
 			elif indice == 1:
 				animated_sprite_2d.rotation_degrees = -90
-				position = Vector2(maxX, y)
+				position = Vector2(maxX + off, y)
 			elif indice == 2:
 				animated_sprite_2d.rotation_degrees = 0
-				position = Vector2(x, maxY)
+				position = Vector2(x, maxY + off)
 			else:
 				animated_sprite_2d.rotation_degrees = 90
-				position = Vector2(minX, y)
+				position = Vector2(minX - off, y)
 		else:
 			if Global.parede == 0:
 				position.y  += delta * SPEED
