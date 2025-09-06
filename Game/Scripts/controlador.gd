@@ -15,8 +15,6 @@ func _process(delta: float) -> void:
 	elif Global.tempo == 15 and Global.estagio == 3:
 		Global.estagio = 4
 	
-	print("Tempo: " + str(Global.tempo))	
-	print(Global.estagio)
 	pass
 
 func _on_timer_timeout() -> void:
