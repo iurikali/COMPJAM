@@ -21,6 +21,7 @@ var collision_height : int
 func _ready() -> void:
 	background_width = background.get_node("Area2D").get_node("CollisionShape2D").shape.size.x
 	background_height = background.get_node("Area2D").get_node("CollisionShape2D").shape.size.y
+	Global.window_size = Vector2(background_width, background_height)
 	collsion_width = collision.shape.size.x
 	collision_height = collision.shape.size.y
 

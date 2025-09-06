@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4ly4i5w1atli"]
+[gd_scene load_steps=4 format=3 uid="uid://b4ly4i5w1atli"]
 
 [ext_resource type="PackedScene" uid="uid://doboxgtvclv1t" path="res://Cenas/background.tscn" id="1_74bqr"]
 [ext_resource type="PackedScene" uid="uid://d3g3b285grq1b" path="res://Cenas/Runner/player_runner.tscn" id="1_x3hk2"]
+[ext_resource type="PackedScene" uid="uid://cagie5mys36dc" path="res://Cenas/obstaculo.tscn" id="3_t1r7p"]
 
 [node name="Main" type="Node2D"]
 
@@ -11,3 +12,5 @@
 
 [node name="Player_runner" parent="." node_paths=PackedStringArray("background") instance=ExtResource("1_x3hk2")]
 background = NodePath("../Background")
+
+[node name="Obstaculo" parent="." instance=ExtResource("3_t1r7p")]

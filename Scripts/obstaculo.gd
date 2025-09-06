@@ -2,14 +2,11 @@ extends Node2D
 
 var SPEED = 200
 var saiu = false
+var tolerancia = 100
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Global.window_size = get_viewport().size
-	var mouse_pos = get_global_mouse_position()
-	position.y = Global.window_size.y
-	position.x = mouse_pos.x
 	pass # Replace with function body.
 		
 
@@ -21,33 +18,75 @@ func dist(pos: Vector2, wall: Vector2):
 func _process(delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	
+	var minX = - Global.window_size.x / 2
+	var maxX =  Global.window_size.x / 2
+	var minY = - Global.window_size.y / 2
+	var maxY =  Global.window_size.y / 2
+	
+	var x
+	var y
+	
+	print(minX)
+	print(maxX)
+	print(minY)
+	print(maxY)
+	
 	var dists = [
-		dist(mouse_pos, Vector2(mouse_pos.x,0)), 
-		dist(mouse_pos, Vector2(Global.window_size.x, mouse_pos.y)),
-		dist(mouse_pos, Vector2(mouse_pos.x, Global.window_size.y)),
-		dist(mouse_pos, Vector2(0, mouse_pos.y))
+		dist(mouse_pos, Vector2(mouse_pos.x,minY)), 
+		dist(mouse_pos, Vector2(maxX, mouse_pos.y)),
+		dist(mouse_pos, Vector2(mouse_pos.x, maxY)),
+		dist(mouse_pos, Vector2(minY, mouse_pos.y))
 	]
 
+			
+
+	var valido = verifica_boundary(position)
+	
 	var maximo = dists[0]
 	
 	var indice = 0
+	
 	for i in range(4):
 		if dists[i] < dists[indice]:
 			indice = i
+	#else:
+		#if mouse_pos.x < minX:
+			#indice = 3
+		#elif mouse_pos.x > maxX:
+			#indice = 2
+		#elif mouse_pos.y < minY:
+			#indice = 0
+		#else:
+			#indice = 1
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		saiu = true
 		Global.parede = indice
 	
 	if not saiu:
-		if indice == 0:
-			position = Vector2(mouse_pos.x, 0)
-		elif indice == 1:
-			position = Vector2(Global.window_size.x, mouse_pos.y)
-		elif indice == 2:
-			position = Vector2(mouse_pos.x, Global.window_size.y)
+		
+		if mouse_pos.x < minX:
+			x = minX
+		elif mouse_pos.x > maxX:
+			x = maxX
 		else:
-			position = Vector2(0, mouse_pos.y)
+			x = mouse_pos.x
+			
+		if mouse_pos.y < minY:
+			y = minY
+		elif mouse_pos.y > maxY:
+			y = maxY
+		else:
+			y = mouse_pos.y
+			
+		if indice == 0:
+			position = Vector2(x, minY)
+		elif indice == 1:
+			position = Vector2(maxX, y)
+		elif indice == 2:
+			position = Vector2(x, maxY)
+		else:
+			position = Vector2(minX, y)
 	else:
 		if Global.parede == 0:
 			position.y  += delta * SPEED
@@ -63,4 +102,5 @@ func _process(delta: float) -> void:
 
 
 func verifica_boundary(pos: Vector2):
-	return pos.x >= -30 and pos.x <= Global.window_size.x + 30 and pos.y >= -30 and pos.y <= Global.window_size.y + 30
+	return pos.x >= - tolerancia - Global.window_size.x / 2 and pos.x <=  tolerancia + Global.window_size.x / 2  and pos.y >= -tolerancia - Global.window_size.y / 2 and pos.y <= tolerancia + Global.window_size.y / 2 
+	

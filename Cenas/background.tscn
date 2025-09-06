@@ -8,9 +8,11 @@ size = Vector2(420, 240)
 [node name="Background" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.52, 1)
 texture = ExtResource("1_nbkas")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.52, 1)
 shape = SubResource("RectangleShape2D_nbkas")
