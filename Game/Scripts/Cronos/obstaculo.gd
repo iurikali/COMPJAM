@@ -1,6 +1,6 @@
 extends Node2D
 
-var SPEED = 800
+var SPEED = 600
 var saiu = false
 var tol_block= 500
 var tol_mouse = 10
