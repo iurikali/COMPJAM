@@ -8,6 +8,7 @@ var speed := 100
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
+var state := "idle"
 
 var background_width : int 
 var background_height : int 
@@ -21,6 +22,10 @@ func _ready() -> void:
 	collsion_width = collision.shape.size.x
 	collision_height = collision.shape.size.y
 
+func _process(delta: float) -> void:
+	state_machine()
+	pass
+
 
 func _physics_process(delta: float) -> void:
 	
@@ -30,9 +35,34 @@ func _physics_process(delta: float) -> void:
 	velocity.x = velh * speed
 	velocity.y = velv * speed
 	
-	
-	print(background.get_node("Sprite2D").texture.get_width())
 	move_and_slide()
 	position.x = clamp(position.x, -background_width * .5 + collsion_width * .5, background_width * .5 - collsion_width * .5)
 	position.y = clamp(position.y, -background_height * .5 + collision_height * .5, background_height * .5 - collision_height * .5)
-	
+
+
+func state_machine():
+	match state:
+		"idle":
+			sprite.play("idle")
+			if velh != 0 or velv != 0:
+				sprite.stop()
+				state = "running"
+		
+		"running":
+			if velh > 0 && velv == 0:
+				if sprite.animation != "right":
+					sprite.play("right")
+			if velh < 0 && velv == 0:
+				if sprite.animation != "left":
+					sprite.play("left")
+			if velv > 0:
+				if sprite.animation != "down":
+					sprite.play("down")
+			if velv < 0: 
+				if sprite.animation != "up":
+					sprite.play("up")
+			
+			
+			if velh == 0 && velv == 0:
+				sprite.stop()
+				state = "idle"
