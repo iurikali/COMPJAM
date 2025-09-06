@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://blyumr7g4djj"]
+
+[sub_resource type="Animation" id="Animation_ic1u1"]
+resource_name = "on"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.266667, 0.137255, 0), Color(0, 0.266667, 0.137255, 0.752941), Color(0, 0.266667, 0.137255, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fhcj2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.266667, 0.137255, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0scif"]
+_data = {
+"RESET": SubResource("Animation_fhcj2"),
+"on": SubResource("Animation_ic1u1")
+}
+
+[node name="LevelUp" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -34.0
+offset_top = -11.0
+offset_right = 1299.0
+offset_bottom = 756.0
+color = Color(0, 0.266667, 0.137255, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0scif")
+}
