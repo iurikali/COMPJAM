@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4ly4i5w1atli"]
+[gd_scene load_steps=6 format=3 uid="uid://b4ly4i5w1atli"]
 
 [ext_resource type="PackedScene" uid="uid://doboxgtvclv1t" path="res://Cenas/background.tscn" id="1_74bqr"]
 [ext_resource type="PackedScene" uid="uid://d3g3b285grq1b" path="res://Cenas/Runner/player_runner.tscn" id="1_x3hk2"]
 [ext_resource type="PackedScene" uid="uid://cagie5mys36dc" path="res://Cenas/Cronos/obstaculo.tscn" id="3_t1r7p"]
 [ext_resource type="PackedScene" uid="uid://bmjceffp6uxrp" path="res://Cenas/Runner/filter_special.tscn" id="4_fqt4t"]
+[ext_resource type="PackedScene" uid="uid://b3dro64ihrvp0" path="res://Cenas/Controlador.tscn" id="5_ccy45"]
 
 [node name="Main" type="Node2D"]
 
@@ -26,6 +27,9 @@ one_shot = true
 
 [node name="Filter_special" parent="." instance=ExtResource("4_fqt4t")]
 z_index = 5
+
+[node name="Controlador" parent="." instance=ExtResource("5_ccy45")]
+position = Vector2(34, 445)
 
 [connection signal="timeout" from="specialTime" to="Player_runner" method="_on_special_time_timeout"]
 [connection signal="timeout" from="specialCooldown" to="Player_runner" method="_on_special_cooldown_timeout"]
