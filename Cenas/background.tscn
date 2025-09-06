@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c6e4wa3se2ul2" path="res://Sprites/background.png" id="1_nbkas"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbkas"]
-size = Vector2(640, 240)
+size = Vector2(500, 240)
 
 [node name="Background" type="Node2D"]
 

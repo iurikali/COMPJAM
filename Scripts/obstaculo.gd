@@ -2,8 +2,10 @@ extends Node2D
 
 var SPEED = 200
 var saiu = false
-var tolerancia = 100
+var tol_block= 100
+var tol_mouse = 10
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,11 +27,7 @@ func _process(delta: float) -> void:
 	
 	var x
 	var y
-	
-	print(minX)
-	print(maxX)
-	print(minY)
-	print(maxY)
+
 	
 	var dists = [
 		dist(mouse_pos, Vector2(mouse_pos.x,minY)), 
@@ -40,24 +38,24 @@ func _process(delta: float) -> void:
 
 			
 
-	var valido = verifica_boundary(position)
-	
+	var valido = verifica_boundary(position, tol_block)
+	var mouse_valido = verifica_boundary(mouse_pos, tol_mouse)
 	var maximo = dists[0]
 	
 	var indice = 0
-	
-	for i in range(4):
-		if dists[i] < dists[indice]:
-			indice = i
-	#else:
-		#if mouse_pos.x < minX:
-			#indice = 3
-		#elif mouse_pos.x > maxX:
-			#indice = 2
-		#elif mouse_pos.y < minY:
-			#indice = 0
-		#else:
-			#indice = 1
+	if mouse_valido:
+		for i in range(4):
+			if dists[i] < dists[indice]:
+				indice = i
+	else:
+		if mouse_pos.x < minX - tol_mouse:
+			indice = 3
+		elif mouse_pos.x > maxX + tol_mouse:
+			indice = 1
+		elif mouse_pos.y < minY - tol_mouse:
+			indice = 0
+		else:
+			indice = 2
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		saiu = true
@@ -80,12 +78,16 @@ func _process(delta: float) -> void:
 			y = mouse_pos.y
 			
 		if indice == 0:
+			animated_sprite_2d.rotation_degrees = 180
 			position = Vector2(x, minY)
 		elif indice == 1:
+			animated_sprite_2d.rotation_degrees = -90
 			position = Vector2(maxX, y)
 		elif indice == 2:
+			animated_sprite_2d.rotation_degrees = 0
 			position = Vector2(x, maxY)
 		else:
+			animated_sprite_2d.rotation_degrees = 90
 			position = Vector2(minX, y)
 	else:
 		if Global.parede == 0:
@@ -97,10 +99,10 @@ func _process(delta: float) -> void:
 		else:
 			position.x += delta * SPEED
 	
-	if not verifica_boundary(position):
+	if not verifica_boundary(position, tol_block):
 		saiu = false
 
 
-func verifica_boundary(pos: Vector2):
+func verifica_boundary(pos: Vector2, tolerancia: int):
 	return pos.x >= - tolerancia - Global.window_size.x / 2 and pos.x <=  tolerancia + Global.window_size.x / 2  and pos.y >= -tolerancia - Global.window_size.y / 2 and pos.y <= tolerancia + Global.window_size.y / 2 
 	
