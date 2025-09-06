@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cagie5mys36dc"]
 
-[ext_resource type="Script" uid="uid://bushmkooaofwc" path="res://Scripts/obstaculo.gd" id="1_xv8jd"]
-[ext_resource type="Texture2D" uid="uid://tqw81iskb2ls" path="res://Sprites/playerholder.png" id="2_seo1j"]
+[ext_resource type="Script" path="res://Scripts/obstaculo.gd" id="1_xv8jd"]
+[ext_resource type="Texture2D" uid="uid://0g82xxj18tdq" path="res://Assets/tiles/spear.png" id="2_kvrke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qma4n"]
 
@@ -9,10 +9,10 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_seo1j")
+"texture": ExtResource("2_kvrke")
 }],
 "loop": true,
-"name": &"default",
+"name": &"padrones",
 "speed": 5.0
 }]
 
@@ -24,7 +24,8 @@ script = ExtResource("1_xv8jd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_qma4n")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D/CollisionShape2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_252ob")
+animation = &"padrones"
 
 [connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]
