@@ -1,6 +1,6 @@
 extends Node2D
 
-var SPEED = 600
+var SPEED = 400
 var saiu = false
 var tol_block= 500
 var tol_mouse = 10
@@ -55,6 +55,8 @@ func _process(delta: float) -> void:
 			animated_sprite_2d.play("lv1")
 			
 		if Global.estagio == 2:
+			if SPEED != 500:
+				SPEED = 500
 			corpo_principal.shape.extents = corpoPrincipalTam2
 			corpo_principal.position = corpoPrincipalPos2
 			corpo_largo.shape.extents = corpoLargoTam2
@@ -62,6 +64,8 @@ func _process(delta: float) -> void:
 			animated_sprite_2d.play("lv2")
 			
 		elif Global.estagio == 3:
+			if SPEED != 600:
+				SPEED = 600
 			corpo_principal.shape.extents = corpoPrincipalTam2
 			corpo_principal.position = corpoPrincipalPos2
 			corpo_largo.shape.extents = corpoLargoTam3
@@ -69,6 +73,8 @@ func _process(delta: float) -> void:
 			animated_sprite_2d.play("lv3")
 			
 		elif Global.estagio == 4:
+			if SPEED != 700:
+				SPEED = 700
 			corpo_principal.shape.extents = corpoPrincipalTam4
 			corpo_principal.position = corpoPrincipalPos4
 			corpo_largo.shape.extents = corpoLargoTam4
