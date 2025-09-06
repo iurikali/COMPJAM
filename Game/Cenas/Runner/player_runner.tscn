@@ -316,6 +316,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_ufu3m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FilterDead:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0.0627451, 0.0392157, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_cymd5"]
 resource_name = "dead"
 tracks/0/type = "value"
@@ -345,21 +360,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_ufu3m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FilterDead:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0.0627451, 0.0392157, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0h2si"]
 _data = {
 "RESET": SubResource("Animation_ufu3m"),
@@ -374,7 +374,7 @@ script = ExtResource("1_ixs5c")
 z_index = 3
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_m63e6")
-animation = &"dead"
+animation = &"down"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

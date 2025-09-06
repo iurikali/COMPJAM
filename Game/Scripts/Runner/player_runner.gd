@@ -24,7 +24,7 @@ var special_cooldown := 5
 const DEAD_ZOOM_MAX := 4.0
 const DEAD_INC := .1
 var stop_player := false
-
+var buffer_init := 10
 
 var shadow_scene := preload("res://Cenas/Runner/runner_shadow.tscn")
 
@@ -47,6 +47,8 @@ func _ready() -> void:
 	special_cooldown_node.wait_time = special_cooldown
 
 func _process(delta: float) -> void:
+	if buffer_init > 0:
+		buffer_init -= 1
 	state_machine()
 	
 	if in_cooldown:
@@ -118,12 +120,13 @@ func state_machine():
 func _input(event: InputEvent) -> void:
 	if (event.is_action_pressed("Special") && has_special):
 		special_activate()
-	if (event.is_action_pressed("dead")):
-		state = "dead"
+	#if (event.is_action_pressed("dead")):
+	#	state = "dead"
 
 
 func dano():
-	print("Levou dano")
+	if buffer_init <= 0:
+		state = "dead"
 	
 
 func special_activate():
