@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgfqb45f8vcwa"]
+
+[ext_resource type="Script" path="res://Scripts/obstaculo.gd" id="1_xv8jd"]
+[ext_resource type="Texture2D" uid="uid://tqw81iskb2ls" path="res://Sprites/playerholder.png" id="2_seo1j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qma4n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_252ob"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_seo1j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Obstaculo" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_xv8jd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_qma4n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D/CollisionShape2D"]
+sprite_frames = SubResource("SpriteFrames_252ob")
+
+[connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]
