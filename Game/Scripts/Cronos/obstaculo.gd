@@ -26,6 +26,15 @@ func _process(delta: float) -> void:
 	if !Global.player_dead:
 		var mouse_pos = get_global_mouse_position()
 		
+		if Global.estagio == 1:
+			animated_sprite_2d.play("lv1")
+		if Global.estagio == 2:
+			animated_sprite_2d.play("lv2")
+		elif Global.estagio == 3:
+			animated_sprite_2d.play("lv3")
+		elif Global.estagio == 4:
+			animated_sprite_2d.play("final")
+		
 		var minX = - Global.window_size.x / 2
 		var maxX =  Global.window_size.x / 2
 		var minY = - Global.window_size.y / 2
@@ -89,16 +98,16 @@ func _process(delta: float) -> void:
 				y = mouse_pos.y
 				
 			if indice == 0:
-				animated_sprite_2d.rotation_degrees = 180
+				rotation_degrees = 180
 				position = Vector2(x, minY - off)
 			elif indice == 1:
-				animated_sprite_2d.rotation_degrees = -90
+				rotation_degrees = -90
 				position = Vector2(maxX + off, y)
 			elif indice == 2:
-				animated_sprite_2d.rotation_degrees = 0
+				rotation_degrees = 0
 				position = Vector2(x, maxY + off)
 			else:
-				animated_sprite_2d.rotation_degrees = 90
+				rotation_degrees = 90
 				position = Vector2(minX - off, y)
 		else:
 			if Global.parede == 0:
@@ -125,7 +134,7 @@ func verifica_boundary(pos: Vector2, tolerancia: int):
 func shadow():
 	var shadow_inst := shadow_scene.instantiate()
 	shadow_inst.get_node("AnimatedSprite2D").animation = animated_sprite_2d.animation
-	shadow_inst.get_node("AnimatedSprite2D").rotation_degrees = animated_sprite_2d.rotation_degrees
+	shadow_inst.get_node("AnimatedSprite2D").rotation_degrees = rotation_degrees
 	shadow_inst.position = position
 	get_tree().current_scene.add_child(shadow_inst, true)
 

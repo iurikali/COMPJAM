@@ -1,23 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://cagie5mys36dc"]
+[gd_scene load_steps=9 format=3 uid="uid://cagie5mys36dc"]
 
 [ext_resource type="Script" path="res://Scripts/Cronos/obstaculo.gd" id="1_xv8jd"]
-[ext_resource type="Texture2D" uid="uid://celc7180fy3xu" path="res://Sprites/Cronos/spear.png" id="2_tweoo"]
+[ext_resource type="Texture2D" uid="uid://j8tpwbpo1w47" path="res://Sprites/Cronos/spear_final.png" id="2_33725"]
+[ext_resource type="Texture2D" uid="uid://cxu8j1ax05l1a" path="res://Sprites/Cronos/spear_lvl1.png" id="3_uxhsv"]
+[ext_resource type="Texture2D" uid="uid://2je0hc3aqrqc" path="res://Sprites/Cronos/spear_lvl2.png" id="4_sdpgl"]
+[ext_resource type="Texture2D" uid="uid://dyhhowxnkyel2" path="res://Sprites/Cronos/spear_lvl3.png" id="5_a17dm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8es2r"]
 size = Vector2(20, 87)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vrwgp"]
-atlas = ExtResource("2_tweoo")
-region = Rect2(0, 0, 85, 176)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_252ob"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vrwgp")
+"texture": ExtResource("2_33725")
 }],
 "loop": true,
 "name": &"final",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uxhsv")
+}],
+"loop": true,
+"name": &"lv1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sdpgl")
+}],
+"loop": true,
+"name": &"lv2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_a17dm")
+}],
+"loop": true,
+"name": &"lv3",
 "speed": 5.0
 }, {
 "frames": [{
@@ -47,7 +70,7 @@ shape = SubResource("RectangleShape2D_8es2r")
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_252ob")
 animation = &"final"
-autoplay = "final"
+autoplay = "lv1"
 
 [node name="Area2D2" type="Area2D" parent="."]
 

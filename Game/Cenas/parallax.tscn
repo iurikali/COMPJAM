@@ -3,10 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://c12lg0i34i3tg" path="res://Sprites/map.png" id="1_tay0b"]
 
 [node name="Parallax" type="Node2D"]
+z_index = 3
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = 10
 position = Vector2(0, -13)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]

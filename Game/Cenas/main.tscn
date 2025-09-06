@@ -12,6 +12,7 @@
 zoom = Vector2(2, 2)
 
 [node name="Background" parent="." instance=ExtResource("1_74bqr")]
+z_index = 10
 
 [node name="Player_runner" parent="." node_paths=PackedStringArray("filter", "background", "camera") instance=ExtResource("1_x3hk2")]
 filter = NodePath("../Filter_special")
