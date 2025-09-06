@@ -1,11 +1,32 @@
 extends Node2D
 
-var SPEED = 200
+var SPEED = 800
 var saiu = false
-var tol_block= 100
+var tol_block= 500
 var tol_mouse = 10
 var off = 30
 
+var corpoPrincipalTam1 = Vector2(25 / 2, 161 / 2)
+var corpoPrincipalPos1 = Vector2(0.5, 1.5)
+var corpoLargoTam1 = Vector2(40.5 / 2, 37 / 2)
+var corpoLargoPos1 = Vector2(-0.25, 9.5)
+
+var corpoPrincipalTam2 = Vector2(25 / 2, 169 / 2)
+var corpoPrincipalPos2 = Vector2(0.5, 0.5)
+var corpoLargoTam2 = Vector2(50 / 2, 53 / 2)
+var corpoLargoPos2 = Vector2(0, 10.5)
+
+var corpoLargoTam3 = Vector2(52 / 2, 71 / 2)
+var corpoLargoPos3 = Vector2(0, 1.5)
+
+var corpoPrincipalTam4 = Vector2(27 / 2, 172 / 2)
+var corpoPrincipalPos4 = Vector2(1.5, 2)
+var corpoLargoTam4 = Vector2(73 / 2, 69 / 2)
+var corpoLargoPos4 = Vector2(0.5, 3.5)
+
+
+@onready var corpo_largo: CollisionShape2D = $Area2D2/CorpoLargo
+@onready var corpo_principal: CollisionShape2D = $Area2D/CorpoPrincipal
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $Area2D/AnimatedSprite2D
 
@@ -27,12 +48,31 @@ func _process(delta: float) -> void:
 		var mouse_pos = get_global_mouse_position()
 		
 		if Global.estagio == 1:
+			corpo_principal.shape.extents = corpoPrincipalTam1
+			corpo_principal.position = corpoPrincipalPos1
+			corpo_largo.shape.extents = corpoLargoTam1
+			corpo_largo.position = corpoLargoPos1
 			animated_sprite_2d.play("lv1")
+			
 		if Global.estagio == 2:
+			corpo_principal.shape.extents = corpoPrincipalTam2
+			corpo_principal.position = corpoPrincipalPos2
+			corpo_largo.shape.extents = corpoLargoTam2
+			corpo_largo.position = corpoLargoPos2
 			animated_sprite_2d.play("lv2")
+			
 		elif Global.estagio == 3:
+			corpo_principal.shape.extents = corpoPrincipalTam2
+			corpo_principal.position = corpoPrincipalPos2
+			corpo_largo.shape.extents = corpoLargoTam3
+			corpo_largo.position = corpoLargoPos3
 			animated_sprite_2d.play("lv3")
+			
 		elif Global.estagio == 4:
+			corpo_principal.shape.extents = corpoPrincipalTam4
+			corpo_principal.position = corpoPrincipalPos4
+			corpo_largo.shape.extents = corpoLargoTam4
+			corpo_largo.position = corpoLargoPos4
 			animated_sprite_2d.play("final")
 		
 		var minX = - Global.window_size.x / 2
