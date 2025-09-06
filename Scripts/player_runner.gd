@@ -8,6 +8,8 @@ var speed := 100
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
+var shadow_scene := preload("res://Cenas/Runner/runner_shadow.tscn")
+
 var state := "idle"
 
 var background_width : int 
@@ -17,8 +19,8 @@ var collsion_width : int
 var collision_height : int
 
 func _ready() -> void:
-	background_width = background.get_node("Sprite2D").texture.get_width()
-	background_height = background.get_node("Sprite2D").texture.get_height()
+	background_width = background.get_node("Area2D").get_node("CollisionShape2D").shape.size.x
+	background_height = background.get_node("Area2D").get_node("CollisionShape2D").shape.size.y
 	collsion_width = collision.shape.size.x
 	collision_height = collision.shape.size.y
 
@@ -29,6 +31,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
+
 	velh = Input.get_axis("LEFT", "RIGHT")
 	velv = Input.get_axis("UP", "DOWN")
 
@@ -62,6 +65,12 @@ func state_machine():
 				if sprite.animation != "up":
 					sprite.play("up")
 			
+			#Criando o rastro
+			var shadow := shadow_scene.instantiate()
+			shadow.position = position
+			shadow.get_node("AnimatedSprite2D").animation = sprite.animation
+			shadow.get_node("AnimatedSprite2D").frame = sprite.frame
+			get_tree().current_scene.add_child(shadow, true)
 			
 			if velh == 0 && velv == 0:
 				sprite.stop()

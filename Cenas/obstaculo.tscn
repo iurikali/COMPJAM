@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgfqb45f8vcwa"]
+[gd_scene load_steps=5 format=3 uid="uid://cagie5mys36dc"]
 
-[ext_resource type="Script" path="res://Scripts/obstaculo.gd" id="1_xv8jd"]
+[ext_resource type="Script" uid="uid://bushmkooaofwc" path="res://Scripts/obstaculo.gd" id="1_xv8jd"]
 [ext_resource type="Texture2D" uid="uid://tqw81iskb2ls" path="res://Sprites/playerholder.png" id="2_seo1j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qma4n"]
