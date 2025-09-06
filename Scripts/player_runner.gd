@@ -11,4 +11,6 @@ func _physics_process(delta: float) -> void:
 
 	velocity.x = velh * speed
 	velocity.y = velv * speed
+
+		
 	move_and_slide()
