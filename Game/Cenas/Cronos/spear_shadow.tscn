@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://rlllejeivu45"]
+
+[ext_resource type="Script" path="res://Scripts/Cronos/spear_shadow.gd" id="1_3hbfa"]
+[ext_resource type="Shader" path="res://Shaders/blink_shader.gdshader" id="1_y85r5"]
+[ext_resource type="Texture2D" uid="uid://celc7180fy3xu" path="res://Sprites/Cronos/spear.png" id="2_5osok"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfrj7"]
+shader = ExtResource("1_y85r5")
+shader_parameter/blink_color = Color(0, 0.909804, 0.407843, 0.0941176)
+shader_parameter/blink_intensity = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1oug"]
+atlas = ExtResource("2_5osok")
+region = Rect2(0, 0, 85, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ah7kf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1oug")
+}],
+"loop": true,
+"name": &"final",
+"speed": 5.0
+}]
+
+[node name="SpearShadow" type="Node2D"]
+script = ExtResource("1_3hbfa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_wfrj7")
+sprite_frames = SubResource("SpriteFrames_ah7kf")
+animation = &"final"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

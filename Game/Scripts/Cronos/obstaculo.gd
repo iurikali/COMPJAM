@@ -7,6 +7,8 @@ var tol_mouse = 10
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+var shadow_scene := preload("res://Cenas/Cronos/spear_shadow.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -101,8 +103,26 @@ func _process(delta: float) -> void:
 	
 	if not verifica_boundary(position, tol_block):
 		saiu = false
+	
+	shadow()
 
 
 func verifica_boundary(pos: Vector2, tolerancia: int):
 	return pos.x >= - tolerancia - Global.window_size.x / 2 and pos.x <=  tolerancia + Global.window_size.x / 2  and pos.y >= -tolerancia - Global.window_size.y / 2 and pos.y <= tolerancia + Global.window_size.y / 2 
 	
+func shadow():
+	var shadow_inst := shadow_scene.instantiate()
+	shadow_inst.get_node("AnimatedSprite2D").animation = animated_sprite_2d.animation
+	shadow_inst.get_node("AnimatedSprite2D").rotation_degrees = animated_sprite_2d.rotation_degrees
+	shadow_inst.position = position
+	get_tree().current_scene.add_child(shadow_inst, true)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.name == "Player_runner":
+		body.dano()
+
+
+func _on_area_2d_2_body_entered(body: Node2D) -> void:
+	if body.name == "Player_runner":
+		body.dano()

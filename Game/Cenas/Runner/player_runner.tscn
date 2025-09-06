@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://d3g3b285grq1b"]
 
-[ext_resource type="Script" path="res://Scripts/player_runner.gd" id="1_ixs5c"]
+[ext_resource type="Script" path="res://Scripts/Runner/player_runner.gd" id="1_ixs5c"]
 [ext_resource type="Texture2D" uid="uid://b3c4w6grpphd" path="res://Sprites/Hermes/hermes.png" id="2_ixs5c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ye0ej"]

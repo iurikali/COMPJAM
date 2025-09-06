@@ -79,4 +79,4 @@ func state_machine():
 
 
 func dano():
-	print("D")
+	print("Levou dano")
