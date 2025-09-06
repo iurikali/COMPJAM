@@ -4,9 +4,21 @@ var velh := 0
 var velv := 0
 var speed := 100
 
+
+var speed_special := 100
+var has_special := true
+var in_cooldown := false
+var special_time := 2
+var special_cooldown := 5
+@onready var special_time_node: Timer = $"../specialTime"
+@onready var special_cooldown_node: Timer = $"../specialCooldown"
+@onready var cooldown_sprite: AnimatedSprite2D = $Cooldown
+@export var filter : Node2D
+
 @export var background : Node2D
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var collision: CollisionShape2D = $CollisionShape2D
+
 
 var shadow_scene := preload("res://Cenas/Runner/runner_shadow.tscn")
 
@@ -24,10 +36,18 @@ func _ready() -> void:
 	Global.window_size = Vector2(background_width, background_height)
 	collsion_width = collision.shape.size.x
 	collision_height = collision.shape.size.y
+	
+	special_time_node.wait_time = special_time
+	special_cooldown_node.wait_time = special_cooldown
 
 func _process(delta: float) -> void:
 	state_machine()
-	pass
+	
+	if in_cooldown:
+		cooldown_sprite.play("default")
+	else:
+		cooldown_sprite.play("none")
+
 
 
 func _physics_process(delta: float) -> void:
@@ -77,6 +97,31 @@ func state_machine():
 				sprite.stop()
 				state = "idle"
 
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("Special") && has_special):
+		special_activate()
+
 
 func dano():
 	print("Levou dano")
+	
+
+func special_activate():
+	speed += speed_special
+	has_special = false
+	filter.get_node("AnimationPlayer").play("on")
+	special_time_node.start()
+
+func special_desactivte():
+	speed -= speed_special
+	in_cooldown = true
+	filter.get_node("AnimationPlayer").play("off")
+	special_cooldown_node.start()
+
+func _on_special_time_timeout() -> void:
+	special_desactivte()
+
+
+func _on_special_cooldown_timeout() -> void:
+	has_special = true
+	in_cooldown = false

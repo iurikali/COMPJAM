@@ -117,12 +117,13 @@ func shadow():
 	shadow_inst.position = position
 	get_tree().current_scene.add_child(shadow_inst, true)
 
-
-func _on_body_entered(body: Node2D) -> void:
+func colidiu_com_player(body: Node2D):
 	if body.name == "Player_runner":
 		body.dano()
+
+func _on_body_entered(body: Node2D) -> void:
+	colidiu_com_player(body)
 
 
 func _on_area_2d_2_body_entered(body: Node2D) -> void:
-	if body.name == "Player_runner":
-		body.dano()
+	colidiu_com_player(body)

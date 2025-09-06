@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmjceffp6uxrp"]
+
+[sub_resource type="Animation" id="Animation_r4t00"]
+resource_name = "filter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.34902, 0, 0), Color(1, 0.34902, 0, 0.215686)]
+}
+
+[sub_resource type="Animation" id="Animation_ssa2r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.34902, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_d3t41"]
+resource_name = "off"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.34902, 0, 0.215686), Color(1, 0.34902, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_et5v1"]
+_data = {
+"RESET": SubResource("Animation_ssa2r"),
+"off": SubResource("Animation_d3t41"),
+"on": SubResource("Animation_r4t00")
+}
+
+[node name="Filter_special" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1246.0
+offset_top = -744.0
+offset_right = 1501.0
+offset_bottom = 853.0
+color = Color(1, 0.34902, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_et5v1")
+}
