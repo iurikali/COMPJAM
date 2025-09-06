@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cagie5mys36dc"]
+[gd_scene load_steps=6 format=3 uid="uid://cagie5mys36dc"]
 
 [ext_resource type="Script" path="res://Scripts/obstaculo.gd" id="1_xv8jd"]
-[ext_resource type="Texture2D" uid="uid://0g82xxj18tdq" path="res://Assets/tiles/spear.png" id="2_eo0kh"]
+[ext_resource type="Texture2D" uid="uid://celc7180fy3xu" path="res://Sprites/Cronos/spear.png" id="2_tweoo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qma4n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrwgp"]
+atlas = ExtResource("2_tweoo")
+region = Rect2(0, 0, 85, 176)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_252ob"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_eo0kh")
+"texture": SubResource("AtlasTexture_vrwgp")
 }],
 "loop": true,
 "name": &"new_animation",
