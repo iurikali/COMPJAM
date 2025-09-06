@@ -4,7 +4,7 @@ var SPEED = 400
 var saiu = false
 var tol_block= 500
 var tol_mouse = 10
-var off = 30
+var off = 90
 
 var corpoPrincipalTam1 = Vector2(25 / 2, 161 / 2)
 var corpoPrincipalPos1 = Vector2(0.5, 1.5)
