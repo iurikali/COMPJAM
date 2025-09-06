@@ -76,3 +76,7 @@ func state_machine():
 			if velh == 0 && velv == 0:
 				sprite.stop()
 				state = "idle"
+
+
+func dano():
+	print("D")
