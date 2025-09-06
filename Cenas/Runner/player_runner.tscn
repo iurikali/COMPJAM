@@ -245,10 +245,8 @@ script = ExtResource("1_ixs5c")
 z_index = 2
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_m63e6")
-animation = &"down"
+animation = &"up"
 autoplay = "idle"
-frame = 4
-frame_progress = 0.469719
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mbjrq")
